@@ -1,0 +1,44 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+		<item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name ="windowActionBar">false</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+		<item name="android:windowBackground">@color/color_navy</item>
+    </style>
+
+    <style name="ButtonTheme" parent="AppTheme">
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:textColor">@color/color_near_white</item>
+        <item name="colorPrimary">@color/color_near_white</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:backgroundTint">@color/color_greenish</item>
+    </style>
+
+    <style name="TextViewTheme" parent="AppTheme">
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:textColor">@color/color_near_white</item>
+        <item name="colorPrimary">@color/color_near_white</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+	
+	<style name="PopupTheme" parent="Base.Theme.AppCompat.Dialog">
+        <item name="android:background">@color/color2</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:background">@color/color2</item>
+        <item name="android:textColorPrimary">@color/color5</item>
+        <item name="android:fontFamily">casual</item>
+    </style>
+
+</resources>
