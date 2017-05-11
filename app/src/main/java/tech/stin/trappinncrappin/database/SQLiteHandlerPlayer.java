@@ -76,10 +76,14 @@ public class SQLiteHandlerPlayer extends SQLiteOpenHelper {
             SQLiteDatabase db = this.getWritableDatabase();
             db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
             db.execSQL(createPlayerTable());
-
             ContentValues values = PlayerCursorWrapper.createUserValues(user);
             // inserting row
             long id = db.insert(TABLE_NAME, null, values);
+
+            //Add stash
+            SQLiteHanderStash sDB = SQLiteHanderStash.sharedInstance(mContext);
+            sDB.addStash(user.getStash());
+
             db.close();
             Log.d(TAG, "New user inserted into sqlite: " + values.getAsString(PlayerSchema.KEY_NAME ));
         } catch (SQLiteException e) {

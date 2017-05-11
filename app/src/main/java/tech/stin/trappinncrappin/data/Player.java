@@ -21,7 +21,7 @@ public class Player {
         this.message = message;
         this.money = 20;
         this.cycles = 0;
-        this.stash = new Stash();
+        this.stash = new Stash(_id);
     }
 
     public Player(String _id, String name, String message, long money, int cycles, Stash stash) {
@@ -55,5 +55,15 @@ public class Player {
 
     public Stash getStash() {
         return stash;
+    }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "name='" + name + '\'' +
+                ", message='" + message + '\'' +
+                ", money=" + money +
+                ", cycles=" + cycles +
+                '}';
     }
 }

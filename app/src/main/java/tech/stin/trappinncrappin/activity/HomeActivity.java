@@ -15,9 +15,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import tech.stin.trappinncrappin.R;
 import tech.stin.trappinncrappin.app.FragConfig;
 import tech.stin.trappinncrappin.app.SessionManager;
@@ -41,40 +38,6 @@ public class HomeActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         session = new SessionManager(getApplicationContext());
-        player = session.getCurrentPlayer();
-
-        while (player == null) {
-            LayoutInflater inflater = getLayoutInflater();
-            final View dialogView = inflater.inflate(R.layout.dialog_token_input, null);
-            final EditText tokenIn = (EditText) dialogView.findViewById(R.id.player_name_input);
-
-            new AlertDialog.Builder(this, R.style.Theme_AppCompat_DayNight_Dialog_MinWidth)
-                    .setTitle(Html.fromHtml("<h2>Enter token</h2>"))
-                    .setMessage(Html.fromHtml("Enter your name" +
-                            ": "))
-                    .setView(dialogView)
-                    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            if (tokenIn != null) {
-                                String token = tokenIn.getText().toString();
-                                if (token.length() >= 4) {
-                                    player = new Player(token, "message");
-                                } else {
-                                    Toast.makeText(getApplicationContext(),
-                                            "Name must be greater than 4 characters.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-
-                                Log.d(TAG, "Quiz token input: " + token);
-                            }
-                        }
-                    })
-                    .setNegativeButton(android.R.string.no, null)
-                    .setIcon(android.R.drawable.ic_menu_directions)
-                    .show();
-        }
-
 
         FragmentManager fm = getFragmentManager();
         if (fm.findFragmentByTag(FragConfig.HOME_VIEW) != null) {
@@ -87,6 +50,11 @@ public class HomeActivity extends AppCompatActivity {
                     .commit();
         }
 
+        player = session.getCurrentPlayer();
+
+        if (player == null) {
+            newPlayerDialog();
+        }
 
     }
 
@@ -106,5 +74,41 @@ public class HomeActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void newPlayerDialog() {
+        LayoutInflater inflater = getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialog_token_input, null);
+        final EditText tokenIn = (EditText) dialogView.findViewById(R.id.player_name_input);
+        new AlertDialog.Builder(this, R.style.Theme_AppCompat_DayNight_Dialog_MinWidth)
+                .setTitle(Html.fromHtml("<h2>New Player</h2>"))
+                .setMessage(Html.fromHtml("Enter your name" +
+                        ": "))
+                .setView(dialogView)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (tokenIn != null) {
+                            String token = tokenIn.getText().toString();
+                            if (token.length() >= 4) {
+                                player = new Player(token, "message");
+                                session.addPlayer(player);
+                                if (hView != null) {
+                                    hView.setNameText();
+                                }
+                            } else {
+                                newPlayerDialog();
+                                Toast.makeText(getApplicationContext(),
+                                        "Name must be greater than 4 characters.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+                            Log.d(TAG, "Quiz token input: " + token);
+                        }
+                    }
+                })
+                .setCancelable(false)
+                .setIcon(android.R.drawable.ic_menu_directions)
+                .show();
     }
 }

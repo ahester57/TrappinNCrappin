@@ -9,15 +9,17 @@ import java.util.UUID;
 
 public class Stash {
 
-    private String _id;
+    private String user_id;
     private HashMap<String, Integer> mStash;
 
-    public Stash() {
+    public Stash(String user_id) {
         mStash = new HashMap<>();
-        _id = UUID.randomUUID().toString();
+        mStash.put("WEED", 2);
+        this.user_id = user_id;
     }
 
-    public Stash(HashMap<String, Integer> stash) {
+    public Stash(String user_id, HashMap<String, Integer> stash) {
+        this.user_id = user_id;
         mStash = stash;
     }
 
@@ -25,7 +27,7 @@ public class Stash {
         return mStash;
     }
 
-    public String get_id() {
-        return _id;
+    public String getUser_id() {
+        return user_id;
     }
 }

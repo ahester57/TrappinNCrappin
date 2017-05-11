@@ -1,11 +1,15 @@
 package tech.stin.trappinncrappin.database;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import tech.stin.trappinncrappin.data.Stash;
 
@@ -36,7 +40,9 @@ public class SQLiteHanderStash extends SQLiteOpenHelper {
     private String createStashTable() {
         return "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "("
                 + StashSchema.KEY_ID + " INTEGER PRIMARY KEY, "
-                + StashSchema.KEY_UID + " TEXT UNIQUE) ";
+                + StashSchema.KEY_UID + " TEXT, "
+                + StashSchema.KEY_TYPE + "TEXT, "
+                + StashSchema.KEY_VALUE + "INTEGER" + ")";
     }
 
     @Override
@@ -45,7 +51,7 @@ public class SQLiteHanderStash extends SQLiteOpenHelper {
             db.execSQL(createStashTable());
             Log.d(TAG, "Database tables created");
         } catch (SQLiteException e) {
-            Log.d(TAG, "Couldn't create user tables.");
+            Log.d(TAG, "Couldn't create stash tables.");
         }
     }
 
@@ -57,14 +63,40 @@ public class SQLiteHanderStash extends SQLiteOpenHelper {
             // create them again
             onCreate(db);
         } catch (SQLiteException e) {
-            Log.d(TAG, "Couldn't create user tables.");
+            Log.d(TAG, "Couldn't create stash tables.");
+        }
+    }
+
+    // add new user to database
+    public void addStash(final Stash stash) {
+        try {
+            SQLiteDatabase db = this.getWritableDatabase();
+            db.execSQL(createStashTable());
+            String uid = stash.getUser_id();
+            db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " +
+                            StashjjkjkjklSchema.KEY_UID + "=\"" + uid + "\";");
+
+            HashMap<String, Integer> hMap = stash.getStash();
+
+            for (Map.Entry<String, Integer> entry : hMap.entrySet()) {
+                String type = entry.getKey();
+                int value = entry.getValue();
+                ContentValues values = StashCursorWrapper.createStashValues(uid, type, value);
+                // inserting row
+                long id = db.insert(TABLE_NAME, null, values);
+            }
+
+            db.close();
+            Log.d(TAG, "New stash inserted into sqlite: " + stash.getStash().entrySet().toString());
+        } catch (SQLiteException e) {
+            Log.d(TAG, "Couldn't add stash.");
         }
     }
 
     /// get user data
     public Stash getStashForUser(final String _id) { // change to return user object
         final String selectQuery = "SELECT * FROM " + TABLE_NAME + " WHERE " +
-                StashSchema.KEY_UID + "=\"" + _id + "\";StashSchema";
+                StashSchema.KEY_UID + "=\"" + _id + "\";";
         Stash stash = null;
         try {
             SQLiteDatabase db = this.getReadableDatabase();
@@ -78,10 +110,10 @@ public class SQLiteHanderStash extends SQLiteOpenHelper {
             db.close();
 
             if (stash != null) {
-                Log.d(TAG, "Fectching player from Sqlite: " + stash.toString());
+                Log.d(TAG, "Fectching stash from Sqlite: " + stash.getStash().entrySet().toString());
             }
         } catch (SQLiteException e) {
-            Log.d(TAG, "Couldn't get player.");
+            Log.d(TAG, "Couldn't get stash.");
         }
         return stash;
     }
