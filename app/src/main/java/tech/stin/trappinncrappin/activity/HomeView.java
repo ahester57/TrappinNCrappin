@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.lang.ref.WeakReference;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -35,12 +36,19 @@ public class HomeView extends Fragment {
     private RecyclerView qRecyclerView;
 
     private SessionManager session;
+    private WeakReference<HomeListener> hListener;
+
+    interface HomeListener {
+        void goToDealers();
+        void goToStreets();
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
         session = new SessionManager(getActivity());
+        hListener = new WeakReference<>((HomeListener) getActivity());
     }
 
     @Nullable
@@ -50,7 +58,7 @@ public class HomeView extends Fragment {
         player = session.getCurrentPlayer();
 
         tNameView = (TextView) view.findViewById(R.id.name_text_view);
-        qRecyclerView = (RecyclerView) view.findViewById(R.id.course_list_recycler);
+        qRecyclerView = (RecyclerView) view.findViewById(R.id.stash_list_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         qRecyclerView.setLayoutManager(layoutManager);
 
@@ -64,6 +72,20 @@ public class HomeView extends Fragment {
             }
         });
 
+        Button dealers = (Button) view.findViewById(R.id.dealers_button);
+        Button streets = (Button) view.findViewById(R.id.streets_button);
+        dealers.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hListener.get().goToDealers();
+            }
+        });
+        streets.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hListener.get().goToStreets();
+            }
+        });
 
         setNameText();
         if (player != null) {

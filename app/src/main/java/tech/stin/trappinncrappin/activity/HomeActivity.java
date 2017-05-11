@@ -20,7 +20,7 @@ import tech.stin.trappinncrappin.app.FragConfig;
 import tech.stin.trappinncrappin.app.SessionManager;
 import tech.stin.trappinncrappin.data.Player;
 
-public class HomeActivity extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity implements HomeView.HomeListener {
 
     private final static String TAG = HomeActivity.class.getSimpleName();
 
@@ -55,6 +55,16 @@ public class HomeActivity extends AppCompatActivity {
         if (player == null) {
             newPlayerDialog();
         }
+
+    }
+
+    @Override
+    public void goToDealers() {
+
+    }
+
+    @Override
+    public void goToStreets() {
 
     }
 
