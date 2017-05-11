@@ -33,6 +33,10 @@ public class Player {
         this.stash = stash;
     }
 
+    public void addItem(String key, int value) {
+        stash.addItem(key, value);
+    }
+
     public String get_id() {
         return _id;
     }

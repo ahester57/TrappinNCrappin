@@ -23,6 +23,10 @@ public class Stash {
         mStash = stash;
     }
 
+    public void addItem(String key, int value) {
+        mStash.put(key, value);
+    }
+
     public HashMap<String, Integer> getStash() {
         return mStash;
     }

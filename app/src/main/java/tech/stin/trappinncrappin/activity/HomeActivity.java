@@ -95,6 +95,7 @@ public class HomeActivity extends AppCompatActivity {
                                 session.addPlayer(player);
                                 if (hView != null) {
                                     hView.setNameText();
+                                    hView.setStashAdapter(player.getStash());
                                 }
                             } else {
                                 newPlayerDialog();
@@ -111,4 +112,5 @@ public class HomeActivity extends AppCompatActivity {
                 .setIcon(android.R.drawable.ic_menu_directions)
                 .show();
     }
+
 }
