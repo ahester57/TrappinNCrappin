@@ -41,8 +41,8 @@ public class SQLiteHanderStash extends SQLiteOpenHelper {
         return "CREATE TABLE IF NOT EXISTS " + TABLE_NAME + "("
                 + StashSchema.KEY_ID + " INTEGER PRIMARY KEY, "
                 + StashSchema.KEY_UID + " TEXT, "
-                + StashSchema.KEY_TYPE + "TEXT, "
-                + StashSchema.KEY_VALUE + "INTEGER" + ")";
+                + StashSchema.KEY_TYPE + " TEXT, "
+                + StashSchema.KEY_VALUE + " INTEGER" + ")";
     }
 
     @Override
@@ -74,7 +74,7 @@ public class SQLiteHanderStash extends SQLiteOpenHelper {
             db.execSQL(createStashTable());
             String uid = stash.getUser_id();
             db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " +
-                            StashjjkjkjklSchema.KEY_UID + "=\"" + uid + "\";");
+                            StashSchema.KEY_UID + "=\"" + uid + "\";");
 
             HashMap<String, Integer> hMap = stash.getStash();
 
