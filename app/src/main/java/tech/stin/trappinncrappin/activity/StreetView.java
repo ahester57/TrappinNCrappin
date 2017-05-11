@@ -11,13 +11,8 @@ import android.view.ViewGroup;
  * Created by Austin on 5/11/2017.
  */
 
-public class DealerView extends Fragment {
-    private static final String TAG = DealerView.class.getSimpleName();
-
-
-    interface DealerListener {
-
-    }
+public class StreetView extends Fragment {
+    private static final String TAG = StreetView.class.getSimpleName();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

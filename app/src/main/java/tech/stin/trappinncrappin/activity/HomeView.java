@@ -32,7 +32,6 @@ public class HomeView extends Fragment {
     private static final String TAG = HomeView.class.getSimpleName();
 
     private TextView tNameView;
-    private Player player;
     private RecyclerView qRecyclerView;
 
     private SessionManager session;
@@ -55,7 +54,7 @@ public class HomeView extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        player = session.getCurrentPlayer();
+
 
         tNameView = (TextView) view.findViewById(R.id.name_text_view);
         qRecyclerView = (RecyclerView) view.findViewById(R.id.stash_list_recycler);
@@ -66,6 +65,7 @@ public class HomeView extends Fragment {
         temp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Player player = session.getCurrentPlayer();
                 player.addItem(DrugConfig.ACID, 10);
                 session.addPlayer(player);
                 setStashAdapter(player.getStash());
@@ -87,21 +87,25 @@ public class HomeView extends Fragment {
             }
         });
 
-        setNameText();
+
+        Player player = session.getCurrentPlayer();
         if (player != null) {
+            setNameText(player.getName());
             setStashAdapter(player.getStash());
         }
         return view;
     }
 
-    void setNameText() {
-        if (player != null) {
-            tNameView.setText(player.getName());
+    void setNameText(String name) {
+        if (tNameView != null) {
+            tNameView.setText(name);
         }
     }
 
     void setStashAdapter(Stash stash) {
-        qRecyclerView.setAdapter(new StashAdapter(stash));
+        if (qRecyclerView != null) {
+            qRecyclerView.setAdapter(new StashAdapter(stash));
+        }
     }
 
 

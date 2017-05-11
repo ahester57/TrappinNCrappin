@@ -2,6 +2,7 @@ package tech.stin.trappinncrappin.activity;
 
 import android.app.FragmentManager;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -27,14 +28,12 @@ public class HomeActivity extends AppCompatActivity implements HomeView.HomeList
     private SessionManager session;
     private HomeView hView;
 
-    private Player player;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_home);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar_dealer);
         setSupportActionBar(toolbar);
 
         session = new SessionManager(getApplicationContext());
@@ -50,7 +49,7 @@ public class HomeActivity extends AppCompatActivity implements HomeView.HomeList
                     .commit();
         }
 
-        player = session.getCurrentPlayer();
+        Player player = session.getCurrentPlayer();
 
         if (player == null) {
             newPlayerDialog();
@@ -60,12 +59,14 @@ public class HomeActivity extends AppCompatActivity implements HomeView.HomeList
 
     @Override
     public void goToDealers() {
-
+        Intent i = new Intent(this, DealerActivity.class);
+        startActivity(i);
     }
 
     @Override
     public void goToStreets() {
-
+        Intent i = new Intent(this, StreetActivity.class);
+        startActivity(i);
     }
 
     @Override
@@ -101,10 +102,10 @@ public class HomeActivity extends AppCompatActivity implements HomeView.HomeList
                         if (tokenIn != null) {
                             String token = tokenIn.getText().toString();
                             if (token.length() >= 4) {
-                                player = new Player(token, "message");
+                                Player player = new Player(token, "message");
                                 session.addPlayer(player);
                                 if (hView != null) {
-                                    hView.setNameText();
+                                    hView.setNameText(player.getName());
                                     hView.setStashAdapter(player.getStash());
                                 }
                             } else {

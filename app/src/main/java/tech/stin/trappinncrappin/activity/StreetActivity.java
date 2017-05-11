@@ -15,11 +15,11 @@ import tech.stin.trappinncrappin.app.SessionManager;
  * Created by Austin on 5/11/2017.
  */
 
-public class DealerActivity extends AppCompatActivity implements DealerView.DealerListener {
-    private static final String TAG = DealerActivity.class.getSimpleName();
+public class StreetActivity extends AppCompatActivity {
+    private static final String TAG = StreetActivity.class.getSimpleName();
 
     private SessionManager session;
-    private DealerView dView;
+    private StreetView sView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -31,13 +31,13 @@ public class DealerActivity extends AppCompatActivity implements DealerView.Deal
         setSupportActionBar(toolbar);
 
         FragmentManager fm = getFragmentManager();
-        if (fm.findFragmentByTag(FragConfig.DEALER_VIEW) != null) {
-            dView = (DealerView) fm.findFragmentByTag(FragConfig.DEALER_VIEW);
+        if (fm.findFragmentByTag(FragConfig.STREET_VIEW) != null) {
+            sView = (StreetView) fm.findFragmentByTag(FragConfig.STREET_VIEW);
         } else {
             //Fragment not loaded
-            dView = new DealerView();
+            sView = new StreetView();
             fm.beginTransaction()
-                    .add(R.id.dealer_container, dView, FragConfig.DEALER_VIEW)
+                    .add(R.id.dealer_container, sView, FragConfig.STREET_VIEW)
                     .commit();
         }
     }
