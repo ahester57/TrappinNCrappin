@@ -1,16 +1,21 @@
 package tech.stin.trappinncrappin.activity;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -92,6 +97,8 @@ public class HomeView extends Fragment {
         if (player != null) {
             setNameText(player.getName());
             setStashAdapter(player.getStash());
+        } else {
+            newPlayerDialog();
         }
         return view;
     }
@@ -106,6 +113,43 @@ public class HomeView extends Fragment {
         if (qRecyclerView != null) {
             qRecyclerView.setAdapter(new StashAdapter(stash));
         }
+    }
+
+    private void newPlayerDialog() {
+        LayoutInflater inflater = getActivity().getLayoutInflater();
+        final View dialogView = inflater.inflate(R.layout.dialog_token_input, null);
+        final EditText tokenIn = (EditText) dialogView.findViewById(R.id.player_name_input);
+        new AlertDialog.Builder(getActivity(), R.style.Theme_AppCompat_DayNight_Dialog_MinWidth)
+                .setTitle(Html.fromHtml("<h2>New Player</h2>"))
+                .setMessage(Html.fromHtml("Enter your name" +
+                        ": "))
+                .setView(dialogView)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if (tokenIn != null) {
+                            String token = tokenIn.getText().toString();
+                            if (token.length() >= 4) {
+                                Player player = new Player(token, "message");
+                                session.addPlayer(player);
+                                if (player != null) {
+                                    setNameText(player.getName());
+                                    setStashAdapter(player.getStash());
+                                }
+                            } else {
+                                newPlayerDialog();
+                                Toast.makeText(getActivity(),
+                                        "Name must be greater than 4 characters.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+
+                            Log.d(TAG, "Quiz token input: " + token);
+                        }
+                    }
+                })
+                .setCancelable(false)
+                .setIcon(android.R.drawable.ic_menu_directions)
+                .show();
     }
 
 

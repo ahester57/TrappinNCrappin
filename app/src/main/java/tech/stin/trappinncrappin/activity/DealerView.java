@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import tech.stin.trappinncrappin.R;
+
 /**
  * Created by Austin on 5/11/2017.
  */
@@ -27,6 +29,8 @@ public class DealerView extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.fragment_dealer, container, false);
+
+        return view;
     }
 }

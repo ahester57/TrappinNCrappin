@@ -49,11 +49,6 @@ public class HomeActivity extends AppCompatActivity implements HomeView.HomeList
                     .commit();
         }
 
-        Player player = session.getCurrentPlayer();
-
-        if (player == null) {
-            newPlayerDialog();
-        }
 
     }
 
@@ -87,41 +82,6 @@ public class HomeActivity extends AppCompatActivity implements HomeView.HomeList
         }
     }
 
-    private void newPlayerDialog() {
-        LayoutInflater inflater = getLayoutInflater();
-        final View dialogView = inflater.inflate(R.layout.dialog_token_input, null);
-        final EditText tokenIn = (EditText) dialogView.findViewById(R.id.player_name_input);
-        new AlertDialog.Builder(this, R.style.Theme_AppCompat_DayNight_Dialog_MinWidth)
-                .setTitle(Html.fromHtml("<h2>New Player</h2>"))
-                .setMessage(Html.fromHtml("Enter your name" +
-                        ": "))
-                .setView(dialogView)
-                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        if (tokenIn != null) {
-                            String token = tokenIn.getText().toString();
-                            if (token.length() >= 4) {
-                                Player player = new Player(token, "message");
-                                session.addPlayer(player);
-                                if (hView != null) {
-                                    hView.setNameText(player.getName());
-                                    hView.setStashAdapter(player.getStash());
-                                }
-                            } else {
-                                newPlayerDialog();
-                                Toast.makeText(getApplicationContext(),
-                                        "Name must be greater than 4 characters.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
 
-                            Log.d(TAG, "Quiz token input: " + token);
-                        }
-                    }
-                })
-                .setCancelable(false)
-                .setIcon(android.R.drawable.ic_menu_directions)
-                .show();
-    }
 
 }
