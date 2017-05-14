@@ -18,9 +18,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.ref.WeakReference;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 import tech.stin.trappinncrappin.R;
 import tech.stin.trappinncrappin.activity.helper.StashHolder;
@@ -71,7 +68,7 @@ public class HomeView extends Fragment {
             @Override
             public void onClick(View v) {
                 Player player = session.getCurrentPlayer();
-                player.addItem(DrugConfig.ACID, 10);
+                player.addItem(DrugConfig.LSD, 10);
                 session.addPlayer(player);
                 setStashAdapter(player.getStash());
             }

@@ -1,7 +1,8 @@
 package tech.stin.trappinncrappin.data;
 
 import java.util.HashMap;
-import java.util.UUID;
+
+import tech.stin.trappinncrappin.app.DrugConfig;
 
 /**
  * Created by Austin on 5/9/2017.
@@ -13,9 +14,9 @@ public class Stash {
     private HashMap<String, Integer> mStash;
 
     public Stash(String user_id) {
-        mStash = new HashMap<>();
-        mStash.put("WEED", 2);
         this.user_id = user_id;
+        mStash = new HashMap<>();
+        addItem(DrugConfig.WEED, 3);
     }
 
     public Stash(String user_id, HashMap<String, Integer> stash) {
@@ -24,8 +25,30 @@ public class Stash {
     }
 
     public void addItem(String key, int value) {
-        mStash.put(key, value);
+        try {
+            int curVal = mStash.get(key);
+            mStash.put(key, value + curVal);
+        } catch (NullPointerException e) {
+            // Does not have yet
+            mStash.put(key, value);
+        }
     }
+
+    // returns success
+    public boolean sellItem(String key, int value) {
+        try {
+            int curVal = mStash.get(key);
+            if (curVal <= value) {
+                mStash.put(key, value - curVal);
+                return true;
+            }
+        } catch (NullPointerException e) {
+            // Does not have yet
+            return false;
+        }
+        return false;
+    }
+
 
     public HashMap<String, Integer> getStash() {
         return mStash;
@@ -33,5 +56,12 @@ public class Stash {
 
     public String getUser_id() {
         return user_id;
+    }
+
+    @Override
+    public String toString() {
+        return "Stash{" +
+                "mStash=" + mStash.toString() +
+                '}';
     }
 }

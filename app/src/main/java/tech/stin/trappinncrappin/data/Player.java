@@ -33,8 +33,26 @@ public class Player {
         this.stash = stash;
     }
 
-    public void addItem(String key, int value) {
-        stash.addItem(key, value);
+    public void addItem(String key, int amt) {
+        stash.addItem(key, amt);
+    }
+
+    public void addMoney(int amount) {
+        money += amount;
+    }
+
+    // returns success
+    public boolean sellItem(String key, int amt) {
+        return stash.sellItem(key, amt);
+    }
+
+    // returns success
+    public boolean takeMoney(int amt) {
+        if (money > amt) {
+            money -= amt;
+            return true;
+        }
+        return false;
     }
 
     public String get_id() {

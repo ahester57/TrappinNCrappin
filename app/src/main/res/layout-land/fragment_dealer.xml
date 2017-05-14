@@ -25,7 +25,6 @@
         android:layout_marginEnd="8dp" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/dealer_list_recycler"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="116dp"

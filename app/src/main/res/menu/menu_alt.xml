@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/action_check_mark"
-        android:icon="@drawable/ic_action_submit"
-        android:title="submit"
-        app:showAsAction="ifRoom" />
+        android:id="@+id/app_bar_switch"
+        android:title=""
+        app:actionLayout="@layout/support_simple_spinner_dropdown_item" />
 </menu>

@@ -6,14 +6,17 @@ package tech.stin.trappinncrappin.app;
 
 public class DrugConfig {
     public static final String WEED = "WEED";
-    public static final String ACID = "ACID";
+    public static final String LSD = "LSD";
+    public static final String MDMA = "MDMA";
 
     public static String getKey(int pos) {
         switch (pos) {
             case 0:
                 return WEED;
             case 1:
-                return ACID;
+                return LSD;
+            case 2:
+                return MDMA;
             default:
                 return "asdf";
         }

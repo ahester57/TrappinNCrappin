@@ -1,6 +1,9 @@
 package tech.stin.trappinncrappin.data;
 
+import java.util.Random;
 import java.util.UUID;
+
+import tech.stin.trappinncrappin.app.DrugConfig;
 
 /**
  * Created by Austin on 5/12/2017.
@@ -19,7 +22,7 @@ public class Dealer {
         this.name = "Dealer Jim";
         this.message = "Wassup";
         this.money = 9000;
-        this.stash = new Stash(_id);
+        this.stash = generateStash();
     }
 
     public Dealer(String _id, String name, String message, Stash stash) {
@@ -29,8 +32,8 @@ public class Dealer {
         this.stash = stash;
     }
 
-    public void addItem(String key, int value) {
-        stash.addItem(key, value);
+    public void addItem(String key, int amt) {
+        stash.addItem(key, amt);
     }
 
     public String get_id() {
@@ -50,6 +53,15 @@ public class Dealer {
     }
 
     public Stash getStash() {
+        return stash;
+    }
+
+    private Stash generateStash() {
+        Stash stash = new Stash(_id);
+        Random rnd = new Random();
+        addItem(DrugConfig.WEED, (int) rnd.nextDouble() * 70 + 14);
+        addItem(DrugConfig.LSD, (int) rnd.nextDouble() * 100);
+        addItem(DrugConfig.MDMA, (int) rnd.nextDouble() * 56);
         return stash;
     }
 }

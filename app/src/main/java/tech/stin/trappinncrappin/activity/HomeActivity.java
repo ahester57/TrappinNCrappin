@@ -1,25 +1,16 @@
 package tech.stin.trappinncrappin.activity;
 
 import android.app.FragmentManager;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.Html;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.Toast;
 
 import tech.stin.trappinncrappin.R;
 import tech.stin.trappinncrappin.app.FragConfig;
 import tech.stin.trappinncrappin.app.SessionManager;
-import tech.stin.trappinncrappin.data.Player;
 
 public class HomeActivity extends AppCompatActivity implements HomeView.HomeListener {
 
@@ -73,15 +64,13 @@ public class HomeActivity extends AppCompatActivity implements HomeView.HomeList
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
-            case R.id.action_check_mark:
-
-                return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
-
-
+    @Override
+    public void onBackPressed() {
+        //super.onBackPressed();
+    }
 }
