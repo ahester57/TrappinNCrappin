@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +25,11 @@ import tech.stin.trappinncrappin.data.Dealer;
 public class DealerView extends Fragment {
     private static final String TAG = DealerView.class.getSimpleName();
 
+    private Dealer curDealer;
+    private int dPosition;
+
     private RecyclerView dRecycler;
+    private Button bGoToDealer;
     private DealerListener dListener;
 
     interface DealerListener {
@@ -35,6 +40,7 @@ public class DealerView extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
+        dPosition = 0;
     }
 
     @Nullable
@@ -43,6 +49,17 @@ public class DealerView extends Fragment {
         View view = inflater.inflate(R.layout.fragment_dealer, container, false);
         dListener = (DealerListener) getActivity();
 
+        bGoToDealer = (Button) view.findViewById(R.id.button_view_dealer);
+        bGoToDealer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (dListener != null && curDealer != null) {
+                    dListener.goToDealerPage(curDealer);
+                    Log.d(TAG, "Dealer visited: " + curDealer.toString());
+                }
+            }
+        });
+
         dRecycler = (RecyclerView) view.findViewById(R.id.dealer_list_recycler);
         dRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -50,7 +67,7 @@ public class DealerView extends Fragment {
         for (int i = 0; i < 5; i++) {
             dealers.add(new Dealer());
         }
-        dRecycler.setAdapter(new DealerAdapter(dealers));
+        dRecycler.setAdapter(new DealerAdapter(dealers, dPosition));
 
         return view;
     }
@@ -61,8 +78,9 @@ public class DealerView extends Fragment {
         private int selectedPos = 0;
         private List<Dealer> mDealers;
 
-        DealerAdapter(List<Dealer> dealers) {
+        DealerAdapter(List<Dealer> dealers, int pos) {
             mDealers = dealers;
+            selectedPos = pos;
         }
 
         @Override
@@ -73,10 +91,10 @@ public class DealerView extends Fragment {
         }
 
         private void goToDealerPage(int pos) {
-            if (dListener != null && mDealers != null) {
-                Dealer dealer = mDealers.get(pos);
-                dListener.goToDealerPage(dealer);
-                Log.d(TAG, "Dealer selected: " + dealer.toString());
+            if (mDealers != null) {
+                curDealer = mDealers.get(pos);
+                dPosition = pos;
+                Log.d(TAG, "Dealer selected: " + curDealer.toString());
             }
         }
 

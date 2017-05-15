@@ -11,4 +11,5 @@
     <string name="welcome">Well hello</string>
     <string name="customer">Customer</string>
     <string name="stock">In Stock:\u00A0</string>
+    <string name="visit_dealer">Visit Dealer</string>
 </resources>
