@@ -3,12 +3,14 @@ package tech.stin.trappinncrappin.activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import tech.stin.trappinncrappin.R;
@@ -23,24 +25,32 @@ public class DealerView extends Fragment {
     private static final String TAG = DealerView.class.getSimpleName();
 
     private RecyclerView dRecycler;
-
+    private DealerListener dListener;
 
     interface DealerListener {
-
+        void goToDealerPage(Dealer dealer);
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setRetainInstance(true);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dealer, container, false);
+        dListener = (DealerListener) getActivity();
 
         dRecycler = (RecyclerView) view.findViewById(R.id.dealer_list_recycler);
+        dRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        ArrayList<Dealer> dealers = new ArrayList<>();
+        for (int i = 0; i < 5; i++) {
+            dealers.add(new Dealer());
+        }
+        dRecycler.setAdapter(new DealerAdapter(dealers));
 
         return view;
     }
@@ -60,6 +70,14 @@ public class DealerView extends Fragment {
             LayoutInflater inflater = LayoutInflater.from(getActivity());
             View view = inflater.inflate(R.layout.dealer_recycler_item, parent, false);
             return new DealerHolder(view);
+        }
+
+        private void goToDealerPage(int pos) {
+            if (dListener != null && mDealers != null) {
+                Dealer dealer = mDealers.get(pos);
+                dListener.goToDealerPage(dealer);
+                Log.d(TAG, "Dealer selected: " + dealer.toString());
+            }
         }
 
         @Override
@@ -82,6 +100,7 @@ public class DealerView extends Fragment {
                             notifyItemChanged(selectedPos);
                             selectedPos = position;
                             notifyItemChanged(selectedPos);
+                            goToDealerPage(position);
                         }
                     });
                 } catch (IndexOutOfBoundsException e) {

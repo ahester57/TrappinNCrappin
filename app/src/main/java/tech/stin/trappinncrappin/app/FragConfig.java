@@ -7,5 +7,6 @@ package tech.stin.trappinncrappin.app;
 public class FragConfig {
     public static final String HOME_VIEW = "HOME_VIEW";
     public static final String DEALER_VIEW = "DEALER_VIEW";
+    public static final String DEALER_PAGE_VIEW = "DEALER_PAGE_VIEW";
     public static final String STREET_VIEW = "STREETS_VIEW";
 }

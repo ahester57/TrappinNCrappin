@@ -26,7 +26,8 @@ public class DealerHolder extends RecyclerView.ViewHolder {
 
     public void bindDealer(Dealer dealer) {
         tDealerName.setText(dealer.getName());
-        tDealerNumber.setText(dealer.getStash().toString());
+        String stock = "In Stock: " + dealer.getStash().getStash().keySet().toString();
+        tDealerNumber.setText(stock);
         tDealerMessage.setText(dealer.getMessage());
     }
 }

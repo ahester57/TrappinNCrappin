@@ -34,6 +34,7 @@ public class HomeView extends Fragment {
     private static final String TAG = HomeView.class.getSimpleName();
 
     private TextView tNameView;
+    private TextView tMessageView;
     private RecyclerView qRecyclerView;
 
     private SessionManager session;
@@ -59,6 +60,8 @@ public class HomeView extends Fragment {
 
 
         tNameView = (TextView) view.findViewById(R.id.name_text_view);
+        tMessageView = (TextView) view.findViewById(R.id.message_text_view);
+
         qRecyclerView = (RecyclerView) view.findViewById(R.id.stash_list_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         qRecyclerView.setLayoutManager(layoutManager);
@@ -101,8 +104,9 @@ public class HomeView extends Fragment {
     }
 
     void setNameText(String name) {
-        if (tNameView != null) {
+        if (tNameView != null && tMessageView != null) {
             tNameView.setText(name);
+            tMessageView.setText("mesage here");
         }
     }
 

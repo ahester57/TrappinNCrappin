@@ -10,6 +10,7 @@ import android.view.Menu;
 import tech.stin.trappinncrappin.R;
 import tech.stin.trappinncrappin.app.FragConfig;
 import tech.stin.trappinncrappin.app.SessionManager;
+import tech.stin.trappinncrappin.data.Dealer;
 
 /**
  * Created by Austin on 5/11/2017.
@@ -46,5 +47,17 @@ public class DealerActivity extends AppCompatActivity implements DealerView.Deal
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_alt, menu);
         return true;
+    }
+
+    @Override
+    public void goToDealerPage(Dealer dealer) {
+        // change dealer to sqlite
+        FragmentManager fm = getFragmentManager();
+        DealerPageView dPageView = new DealerPageView();
+        dPageView.setDealer(dealer);
+        fm.beginTransaction()
+                .replace(R.id.dealer_container, dPageView, FragConfig.DEALER_PAGE_VIEW)
+                .addToBackStack(null)
+                .commit();
     }
 }

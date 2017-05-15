@@ -16,19 +16,23 @@ public class Dealer {
     private String message;
     private long money;
     private Stash stash;
+    private Random rnd;
 
     public Dealer() {
         this._id = UUID.randomUUID().toString();
         this.name = "Dealer Jim";
         this.message = "Wassup";
         this.money = 9000;
-        this.stash = generateStash();
+        rnd = new Random();
+        rnd.setSeed(System.nanoTime());
+        generateStash();
     }
 
-    public Dealer(String _id, String name, String message, Stash stash) {
+    public Dealer(String _id, String name, String message, long money, Stash stash) {
         this._id = _id;
         this.name = name;
         this.message = message;
+        this.money = money;
         this.stash = stash;
     }
 
@@ -56,12 +60,10 @@ public class Dealer {
         return stash;
     }
 
-    private Stash generateStash() {
-        Stash stash = new Stash(_id);
-        Random rnd = new Random();
-        addItem(DrugConfig.WEED, (int) rnd.nextDouble() * 70 + 14);
-        addItem(DrugConfig.LSD, (int) rnd.nextDouble() * 100);
-        addItem(DrugConfig.MDMA, (int) rnd.nextDouble() * 56);
-        return stash;
+    private void generateStash() {
+        this.stash = new Stash(_id);
+        addItem(DrugConfig.WEED, (int) (rnd.nextDouble() * 70) + 14);
+        addItem(DrugConfig.LSD, (int) (rnd.nextDouble() * 100)  + 10);
+        addItem(DrugConfig.MDMA, (int) (rnd.nextDouble() * 56));
     }
 }
