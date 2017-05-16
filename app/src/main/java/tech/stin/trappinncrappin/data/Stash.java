@@ -1,5 +1,7 @@
 package tech.stin.trappinncrappin.data;
 
+import android.util.Log;
+
 import java.util.HashMap;
 
 import tech.stin.trappinncrappin.app.DrugConfig;
@@ -38,8 +40,8 @@ public class Stash {
     public boolean sellItem(String key, int value) {
         try {
             int curVal = mStash.get(key);
-            if (curVal <= value) {
-                mStash.put(key, value - curVal);
+            if (curVal >= value) {
+                mStash.put(key, curVal - value);
                 return true;
             }
         } catch (NullPointerException e) {

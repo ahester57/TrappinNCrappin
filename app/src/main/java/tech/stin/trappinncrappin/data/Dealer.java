@@ -19,12 +19,12 @@ public class Dealer {
     private Random rnd;
 
     public Dealer() {
-        this._id = UUID.randomUUID().toString();
-        this.name = "Dealer Jim";
-        this.message = "Wassup";
-        this.money = 9000;
         rnd = new Random();
         rnd.setSeed(System.nanoTime());
+        this._id = UUID.randomUUID().toString();
+        this.name = rnd.nextDouble() > 0.5 ? "Dealer Jim" : "Duller Jam";
+        this.message = rnd.nextDouble() < 0.5 ? "Wassup" : "Fuck off Jem";
+        this.money = 9000;
         generateStash();
     }
 
@@ -38,6 +38,24 @@ public class Dealer {
 
     public void addItem(String key, int amt) {
         stash.addItem(key, amt);
+    }
+
+    public void addMoney(int amount) {
+        money += amount;
+    }
+
+    // returns success
+    public boolean sellItem(String key, int amt) {
+        return stash.sellItem(key, amt);
+    }
+
+    // returns success
+    public boolean takeMoney(int amt) {
+        if (money > amt) {
+            money -= amt;
+            return true;
+        }
+        return false;
     }
 
     public String get_id() {

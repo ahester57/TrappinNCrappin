@@ -2,6 +2,7 @@
     <string name="app_name">The Stash Exchange</string>
 	<string name="skip">Skip</string>
     <string name="play">Play</string>
+    <string name="go_back">Go Back</string>
     <string name="check_mark">\u2714</string>
     <string name="x_mark">\u2717</string>
     <string name="name">Enter name</string>
@@ -12,4 +13,7 @@
     <string name="customer">Customer</string>
     <string name="stock">In Stock:\u00A0</string>
     <string name="visit_dealer">Visit Dealer</string>
+    <string name="buy">Buy</string>
+    <string name="sell">Sell</string>
+    <string name="see_info">See Info</string>
 </resources>

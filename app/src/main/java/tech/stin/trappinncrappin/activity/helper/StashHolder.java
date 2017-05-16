@@ -11,22 +11,21 @@ import tech.stin.trappinncrappin.R;
  */
 
 public class StashHolder extends RecyclerView.ViewHolder {
-    private final String TAG = StashHolder.class.getSimpleName();
+    private static final String TAG = StashHolder.class.getSimpleName();
     private TextView tDrugName;
     private TextView tDrugValue;
     private TextView tDrugInfo;
-    private TextView tDrugCaption;
 
     public StashHolder(View itemView) {
         super(itemView);
         tDrugName = (TextView) itemView.findViewById(R.id.text_drug_name);
         tDrugValue = (TextView) itemView.findViewById(R.id.text_drug_amount);
         tDrugInfo = (TextView) itemView.findViewById(R.id.text_drug_info);
-        tDrugCaption = (TextView) itemView.findViewById(R.id.text_drug_caption);
     }
 
     public void bindStash(String key, int value) {
         tDrugName.setText(key);
         tDrugValue.setText(String.valueOf(value));
+        tDrugInfo.setText("Street price: " + "???");
     }
 }

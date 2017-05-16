@@ -63,6 +63,7 @@ public class DealerView extends Fragment {
         dRecycler = (RecyclerView) view.findViewById(R.id.dealer_list_recycler);
         dRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        // @ TODO fix this resetting all the time
         ArrayList<Dealer> dealers = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             dealers.add(new Dealer());
@@ -81,6 +82,7 @@ public class DealerView extends Fragment {
         DealerAdapter(List<Dealer> dealers, int pos) {
             mDealers = dealers;
             selectedPos = pos;
+            setSelectedDealer(pos);
         }
 
         @Override
@@ -90,7 +92,7 @@ public class DealerView extends Fragment {
             return new DealerHolder(view);
         }
 
-        private void goToDealerPage(int pos) {
+        private void setSelectedDealer(int pos) {
             if (mDealers != null) {
                 curDealer = mDealers.get(pos);
                 dPosition = pos;
@@ -118,7 +120,7 @@ public class DealerView extends Fragment {
                             notifyItemChanged(selectedPos);
                             selectedPos = position;
                             notifyItemChanged(selectedPos);
-                            goToDealerPage(position);
+                            setSelectedDealer(position);
                         }
                     });
                 } catch (IndexOutOfBoundsException e) {

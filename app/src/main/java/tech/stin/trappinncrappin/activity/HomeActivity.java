@@ -14,7 +14,7 @@ import tech.stin.trappinncrappin.app.SessionManager;
 
 public class HomeActivity extends AppCompatActivity implements HomeView.HomeListener {
 
-    private final static String TAG = HomeActivity.class.getSimpleName();
+    private static final String TAG = HomeActivity.class.getSimpleName();
 
     private SessionManager session;
     private HomeView hView;
