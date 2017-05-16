@@ -1,7 +1,5 @@
 package tech.stin.trappinncrappin.data;
 
-import android.util.Log;
-
 import java.util.HashMap;
 
 import tech.stin.trappinncrappin.app.DrugConfig;

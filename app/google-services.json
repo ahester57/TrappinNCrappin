@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1059439385667",
+    "firebase_url": "https://the-stash-exchange.firebaseio.com",
+    "project_id": "the-stash-exchange",
+    "storage_bucket": "the-stash-exchange.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1059439385667:android:6ee9d09eae2cdb7b",
+        "android_client_info": {
+          "package_name": "tech.stin.trappinncrappin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1059439385667-j61jjcfb2gotjo5r3skckit8diumh9dt.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "tech.stin.trappinncrappin",
+            "certificate_hash": "87242408b037c6035fb01c5f9a04f3739744faec"
+          }
+        },
+        {
+          "client_id": "1059439385667-v3kuec6qpleluun6642k1j8pabajsr7g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCxO16W4tNAXOS3CP9daAQV_hw4atWQPw"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1059439385667-v3kuec6qpleluun6642k1j8pabajsr7g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

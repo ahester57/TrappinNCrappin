@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +33,7 @@ public class DealerView extends Fragment {
 
     private RecyclerView dRecycler;
     private Button bGoToDealer;
+    private AdView mAdView;
     private DealerListener dListener;
 
     interface DealerListener {
@@ -48,6 +52,10 @@ public class DealerView extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dealer, container, false);
         dListener = (DealerListener) getActivity();
+
+        mAdView = (AdView) view.findViewById(R.id.adview_dealers);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         bGoToDealer = (Button) view.findViewById(R.id.button_view_dealer);
         bGoToDealer.setOnClickListener(new View.OnClickListener() {
