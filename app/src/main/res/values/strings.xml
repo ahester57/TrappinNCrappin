@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">The Stash Exchange</string>
-	<string name="banner_ad_unit_id">ca-app-pub-5085845488260930/7487450202</string>
+	<string name="banner_ad_unit_id_street">ca-app-pub-5085845488260930/7487450202</string>
+    <string name="banner_ad_unit_id_dealer">ca-app-pub-5085845488260930/6649845404</string>
     <string name="skip">Skip</string>
     <string name="play">Play</string>
     <string name="go_back">Go Back</string>
@@ -14,7 +15,9 @@
     <string name="customers">Customers:</string>
     <string name="stock">In Stock:\u00A0</string>
     <string name="visit_dealer">Visit Dealer</string>
+    <string name="visit_customer">Visit Customer</string>
     <string name="buy">Buy</string>
     <string name="sell">Sell</string>
     <string name="see_info">See Info</string>
+    <string name="demand">Demand:\u00A0</string>
 </resources>

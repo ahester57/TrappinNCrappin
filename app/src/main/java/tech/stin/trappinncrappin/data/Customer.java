@@ -1,5 +1,6 @@
 package tech.stin.trappinncrappin.data;
 
+import java.util.Random;
 import java.util.UUID;
 
 /**
@@ -12,12 +13,16 @@ public class Customer {
     private String name;
     private String message;
     private long money;
+    private Random rnd;
 
     public Customer() {
+        rnd = new Random();
+        rnd.setSeed(System.nanoTime());
         this._id = UUID.randomUUID().toString();
-        this.name = "Customer Bobby";
-        this.message = "howdy";
-        this.money = 160;
+        this.name = rnd.nextDouble() > 0.5 ? "Bobby" : "Johnny";
+        this.message = rnd.nextDouble() > 0.5 ? "howdy" : "ayy lmao";
+        this.money = rnd.nextDouble() > 0.5 ? 160 : 240;
+        // @TODO add demand
     }
 
     public Customer(String _id, String name, String message, long money) {
@@ -25,6 +30,15 @@ public class Customer {
         this.name = name;
         this.message = message;
         this.money = money;
+    }
+
+    // returns success
+    public boolean takeMoney(int amt) {
+        if (money > amt) {
+            money -= amt;
+            return true;
+        }
+        return false;
     }
 
     public String get_id() {

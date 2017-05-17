@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import tech.stin.trappinncrappin.R;
 import tech.stin.trappinncrappin.app.FragConfig;
 import tech.stin.trappinncrappin.app.SessionManager;
+import tech.stin.trappinncrappin.data.Player;
 
 public class HomeActivity extends AppCompatActivity implements HomeView.HomeListener {
 
@@ -66,6 +67,15 @@ public class HomeActivity extends AppCompatActivity implements HomeView.HomeList
         switch(item.getItemId()) {
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (hView != null) {
+            Player player = session.getCurrentPlayer();
+            hView.setStashAdapter(player.getStash());
         }
     }
 

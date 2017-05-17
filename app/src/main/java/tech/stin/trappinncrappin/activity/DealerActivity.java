@@ -14,6 +14,8 @@ import tech.stin.trappinncrappin.data.Dealer;
 
 /**
  * Created by Austin on 5/11/2017.
+ *
+ * Dealer Activity
  */
 
 public class DealerActivity extends AppCompatActivity implements DealerView.DealerListener {
@@ -59,5 +61,10 @@ public class DealerActivity extends AppCompatActivity implements DealerView.Deal
                 .replace(R.id.dealer_container, dPageView, FragConfig.DEALER_PAGE_VIEW)
                 .addToBackStack(null)
                 .commit();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 }

@@ -100,6 +100,8 @@ public class HomeView extends Fragment {
         } else {
             newPlayerDialog();
         }
+
+        Log.d(TAG, "Home view onCreateView");
         return view;
     }
 

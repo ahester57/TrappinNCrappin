@@ -23,6 +23,9 @@ import tech.stin.trappinncrappin.data.Dealer;
 
 /**
  * Created by Austin on 5/11/2017.
+ *
+ * View Fragment for Dealer ('contact') screen
+ *
  */
 
 public class DealerView extends Fragment {
@@ -52,6 +55,7 @@ public class DealerView extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dealer, container, false);
         dListener = (DealerListener) getActivity();
+
 
         mAdView = (AdView) view.findViewById(R.id.adview_dealers);
         AdRequest adRequest = new AdRequest.Builder().build();

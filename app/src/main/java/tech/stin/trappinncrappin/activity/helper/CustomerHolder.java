@@ -24,7 +24,7 @@ public class CustomerHolder extends RecyclerView.ViewHolder {
         tCustomerMessage = (TextView) itemView.findViewById(R.id.text_customer_message);
     }
 
-    public void bindDealer(Customer customer) {
+    public void bindCustomer(Customer customer) {
         tCustomerName.setText(customer.getName());
         String money = "Money: $" + customer.getMoney();
         tCustomerCaption.setText(money);

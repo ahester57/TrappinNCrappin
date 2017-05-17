@@ -6,6 +6,7 @@ import tech.stin.trappinncrappin.app.DrugConfig;
 
 /**
  * Created by Austin on 5/9/2017.
+ *
  */
 
 public class Stash {
@@ -13,7 +14,7 @@ public class Stash {
     private String user_id;
     private HashMap<String, Integer> mStash;
 
-    public Stash(String user_id) {
+    Stash(String user_id) {
         this.user_id = user_id;
         mStash = new HashMap<>();
         addItem(DrugConfig.WEED, 3);
@@ -24,7 +25,7 @@ public class Stash {
         mStash = stash;
     }
 
-    public void addItem(String key, int value) {
+    void addItem(String key, int value) {
         try {
             int curVal = mStash.get(key);
             mStash.put(key, value + curVal);
@@ -35,7 +36,7 @@ public class Stash {
     }
 
     // returns success
-    public boolean sellItem(String key, int value) {
+    boolean sellItem(String key, int value) {
         try {
             int curVal = mStash.get(key);
             if (curVal >= value) {
