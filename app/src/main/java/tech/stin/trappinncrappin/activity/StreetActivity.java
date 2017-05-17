@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.Menu;
 
 import tech.stin.trappinncrappin.R;
-import tech.stin.trappinncrappin.activity.helper.CustomerPageView;
 import tech.stin.trappinncrappin.app.FragConfig;
 import tech.stin.trappinncrappin.app.SessionManager;
 import tech.stin.trappinncrappin.data.Dealer;

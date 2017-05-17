@@ -1,4 +1,4 @@
-package tech.stin.trappinncrappin.activity.helper;
+package tech.stin.trappinncrappin.activity;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import tech.stin.trappinncrappin.R;
+import tech.stin.trappinncrappin.activity.helper.CustomerDemandHolder;
 import tech.stin.trappinncrappin.app.DrugConfig;
 import tech.stin.trappinncrappin.app.SessionManager;
 import tech.stin.trappinncrappin.data.Dealer;
@@ -76,10 +77,11 @@ public class CustomerPageView extends Fragment {
             SessionManager session = new SessionManager(getActivity());
             Player player = session.getCurrentPlayer();
             if (curCustomer.takeMoney(1)) {
-                player.sellItem(drug, 1);
-                player.addMoney(1);
-                session.addPlayer(player);
-                Log.d(TAG, "actually sold");
+                if (player.sellItem(drug, 1)) {
+                    player.addMoney(1);
+                    session.addPlayer(player);
+                    Log.d(TAG, "actually sold");
+                }
             }
         }
 
