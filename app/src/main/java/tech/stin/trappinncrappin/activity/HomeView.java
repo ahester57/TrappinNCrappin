@@ -35,6 +35,7 @@ public class HomeView extends Fragment {
 
     private TextView tNameView;
     private TextView tMessageView;
+    private TextView tPlayerMoney;
     private RecyclerView qRecyclerView;
 
     private SessionManager session;
@@ -61,6 +62,7 @@ public class HomeView extends Fragment {
 
         tNameView = (TextView) view.findViewById(R.id.name_text_view);
         tMessageView = (TextView) view.findViewById(R.id.message_text_view);
+        tPlayerMoney = (TextView) view.findViewById(R.id.text_player_money);
 
         qRecyclerView = (RecyclerView) view.findViewById(R.id.stash_list_recycler);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
@@ -95,7 +97,7 @@ public class HomeView extends Fragment {
 
         Player player = session.getCurrentPlayer();
         if (player != null) {
-            setNameText(player.getName());
+            setPlayerText(player);
             setStashAdapter(player.getStash());
         } else {
             newPlayerDialog();
@@ -105,10 +107,12 @@ public class HomeView extends Fragment {
         return view;
     }
 
-    void setNameText(String name) {
-        if (tNameView != null && tMessageView != null) {
-            tNameView.setText(name);
-            tMessageView.setText("mesage here");
+    void setPlayerText(Player player) {
+        if (tNameView != null && tMessageView != null && tPlayerMoney != null) {
+            tNameView.setText(player.getName());
+            tMessageView.setText(player.getMessage());
+            String money = "Money: $" + player.getMoney();
+            tPlayerMoney.setText(money);
         }
     }
 
@@ -136,7 +140,7 @@ public class HomeView extends Fragment {
                                 Player player = new Player(token, "message");
                                 session.addPlayer(player);
                                 if (player != null) {
-                                    setNameText(player.getName());
+                                    setPlayerText(player);
                                     setStashAdapter(player.getStash());
                                 }
                             } else {

@@ -74,8 +74,11 @@ public class SQLiteHandlerPlayer extends SQLiteOpenHelper {
     public void addPlayer(final Player user) {
         try {
             SQLiteDatabase db = this.getWritableDatabase();
-            db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
             db.execSQL(createPlayerTable());
+            String uid = user.get_id();
+            db.execSQL("DELETE FROM " + TABLE_NAME + " WHERE " +
+                    PlayerSchema.KEY_UID + "=\"" + uid + "\";");
+
             ContentValues values = PlayerCursorWrapper.createUserValues(user);
             // inserting row
             long id = db.insert(TABLE_NAME, null, values);
@@ -92,7 +95,7 @@ public class SQLiteHandlerPlayer extends SQLiteOpenHelper {
     }
 
     /// get user data
-    public Player getCurrentPlayer() { // change to return user object
+    public Player getCurrentPlayer() {
         final String selectQuery = "SELECT * FROM " + TABLE_NAME;
         Player user = null;
         try {

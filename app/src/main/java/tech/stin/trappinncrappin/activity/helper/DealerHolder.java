@@ -12,7 +12,7 @@ import tech.stin.trappinncrappin.data.Dealer;
  */
 
 public class DealerHolder extends RecyclerView.ViewHolder {
-    private final String TAG = DealerHolder.class.getSimpleName();
+    private static final String TAG = DealerHolder.class.getSimpleName();
     private TextView tDealerName;
     private TextView tDealerNumber;
     private TextView tDealerMessage;

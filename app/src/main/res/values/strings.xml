@@ -14,10 +14,12 @@
     <string name="welcome">Well hello</string>
     <string name="customers">Customers:</string>
     <string name="stock">In Stock:\u00A0</string>
+    <string name="stash">Your Stash:\u00A0</string>
     <string name="visit_dealer">Visit Dealer</string>
     <string name="visit_customer">Visit Customer</string>
     <string name="buy">Buy</string>
     <string name="sell">Sell</string>
     <string name="see_info">See Info</string>
     <string name="demand">Demand:\u00A0</string>
+    <string name="money">Money:\u00A0</string>
 </resources>

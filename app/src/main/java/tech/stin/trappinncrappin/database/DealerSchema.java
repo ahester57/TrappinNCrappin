@@ -10,4 +10,5 @@ public class DealerSchema {
     public static final String KEY_NAME = "name";
     public static final String KEY_MESSAGE = "message";
     public static final String KEY_MONEY = "money";
+    public static final String KEY_IS_DEALER = "is_dealer";
 }

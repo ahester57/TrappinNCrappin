@@ -73,9 +73,10 @@ public class HomeActivity extends AppCompatActivity implements HomeView.HomeList
     @Override
     protected void onResume() {
         super.onResume();
-        if (hView != null) {
-            Player player = session.getCurrentPlayer();
+        Player player = session.getCurrentPlayer();
+        if (hView != null && player != null) {
             hView.setStashAdapter(player.getStash());
+            hView.setPlayerText(player);
         }
     }
 

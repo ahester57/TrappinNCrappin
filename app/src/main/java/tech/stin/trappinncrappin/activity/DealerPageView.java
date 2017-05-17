@@ -80,6 +80,7 @@ public class DealerPageView extends Fragment {
             if (curDealer.sellItem(drug, 1)) {
                 player.addItem(drug, 1);
                 session.addPlayer(player);
+                session.addDealer(curDealer);
                 Log.d(TAG, "actually sold");
             }
         }

@@ -5,14 +5,14 @@ import android.view.View;
 import android.widget.TextView;
 
 import tech.stin.trappinncrappin.R;
-import tech.stin.trappinncrappin.data.Customer;
+import tech.stin.trappinncrappin.data.Dealer;
 
 /**
  * Created by Austin on 5/16/2017.
  */
 
 public class CustomerHolder extends RecyclerView.ViewHolder {
-    private final String TAG = CustomerHolder.class.getSimpleName();
+    private static final String TAG = CustomerHolder.class.getSimpleName();
     private TextView tCustomerName;
     private TextView tCustomerCaption;
     private TextView tCustomerMessage;
@@ -24,7 +24,7 @@ public class CustomerHolder extends RecyclerView.ViewHolder {
         tCustomerMessage = (TextView) itemView.findViewById(R.id.text_customer_message);
     }
 
-    public void bindCustomer(Customer customer) {
+    public void bindCustomer(Dealer customer) {
         tCustomerName.setText(customer.getName());
         String money = "Money: $" + customer.getMoney();
         tCustomerCaption.setText(money);

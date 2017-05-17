@@ -12,7 +12,7 @@ import tech.stin.trappinncrappin.R;
 import tech.stin.trappinncrappin.activity.helper.CustomerPageView;
 import tech.stin.trappinncrappin.app.FragConfig;
 import tech.stin.trappinncrappin.app.SessionManager;
-import tech.stin.trappinncrappin.data.Customer;
+import tech.stin.trappinncrappin.data.Dealer;
 
 /**
  * Created by Austin on 5/11/2017.
@@ -58,7 +58,7 @@ public class StreetActivity extends AppCompatActivity implements StreetView.Stre
     }
 
     @Override
-    public void goToCustomerPage(Customer customer) {
+    public void goToCustomerPage(Dealer customer) {
         // change customer to sqlite
         FragmentManager fm = getFragmentManager();
         CustomerPageView cPageView = new CustomerPageView();

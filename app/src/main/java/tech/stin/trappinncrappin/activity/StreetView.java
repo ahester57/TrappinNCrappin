@@ -19,7 +19,7 @@ import java.util.List;
 
 import tech.stin.trappinncrappin.R;
 import tech.stin.trappinncrappin.activity.helper.CustomerHolder;
-import tech.stin.trappinncrappin.data.Customer;
+import tech.stin.trappinncrappin.data.Dealer;
 
 /**
  * Created by Austin on 5/11/2017.
@@ -30,7 +30,7 @@ import tech.stin.trappinncrappin.data.Customer;
 public class StreetView extends Fragment {
     private static final String TAG = StreetView.class.getSimpleName();
 
-    private Customer curCustomer;
+    private Dealer curCustomer;
     private int dPosition;
 
     private RecyclerView cRecycler;
@@ -39,7 +39,7 @@ public class StreetView extends Fragment {
     private StreetListener sListener;
 
     interface StreetListener {
-        void goToCustomerPage(Customer customer);
+        void goToCustomerPage(Dealer customer);
     }
 
     @Override
@@ -73,9 +73,9 @@ public class StreetView extends Fragment {
         cRecycler = (RecyclerView) view.findViewById(R.id.customer_recycler);
         cRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
         // @ TODO fix this resetting all the time
-        ArrayList<Customer> customers = new ArrayList<>();
+        ArrayList<Dealer> customers = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            customers.add(new Customer());
+            customers.add(new Dealer(false));
         }
         cRecycler.setAdapter(new CustomerAdapter(customers, dPosition));
 
@@ -87,9 +87,9 @@ public class StreetView extends Fragment {
         private final String TAG = StreetView.CustomerAdapter.class.getSimpleName();
 
         private int selectedPos = 0;
-        private List<Customer> mCustomers;
+        private List<Dealer> mCustomers;
 
-        CustomerAdapter(List<Customer> dealers, int pos) {
+        CustomerAdapter(List<Dealer> dealers, int pos) {
             mCustomers = dealers;
             selectedPos = pos;
             setSelectedCustomer(pos);

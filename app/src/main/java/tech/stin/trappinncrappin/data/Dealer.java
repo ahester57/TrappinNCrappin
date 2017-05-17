@@ -16,24 +16,34 @@ public class Dealer {
     private String message;
     private long money;
     private Stash stash;
+    private boolean isDealer;
     private Random rnd;
 
-    public Dealer() {
+    // give true if dealer, false if customer
+    public Dealer(boolean dealer) {
         rnd = new Random();
         rnd.setSeed(System.nanoTime());
         this._id = UUID.randomUUID().toString();
-        this.name = rnd.nextDouble() > 0.5 ? "Dealer Jim" : "Duller Jam";
-        this.message = rnd.nextDouble() < 0.5 ? "Wassup" : "Fuck off Jem";
-        this.money = 9000;
+        this.isDealer = dealer;
+        if (isDealer) {
+            this.name = rnd.nextDouble() > 0.5 ? "Dealer Jim" : "Duller Jam";
+            this.message = rnd.nextDouble() < 0.5 ? "Wassup" : "Fuck off Jem";
+            this.money = 9000;
+        } else {
+            this.name = rnd.nextDouble() > 0.5 ? "Bobby" : "Johnny";
+            this.message = rnd.nextDouble() > 0.5 ? "howdy" : "ayy lmao";
+            this.money = rnd.nextDouble() > 0.5 ? 160 : 240;
+        }
         generateStash();
     }
 
-    public Dealer(String _id, String name, String message, long money, Stash stash) {
+    public Dealer(String _id, String name, String message, long money, Stash stash, boolean dealer) {
         this._id = _id;
         this.name = name;
         this.message = message;
         this.money = money;
         this.stash = stash;
+        this.isDealer = dealer;
     }
 
     public void addItem(String key, int amt) {
@@ -78,10 +88,18 @@ public class Dealer {
         return stash;
     }
 
+    public boolean isDealer() { return isDealer; }
+
     private void generateStash() {
         this.stash = new Stash(_id);
-        addItem(DrugConfig.WEED, (int) (rnd.nextDouble() * 70) + 14);
-        addItem(DrugConfig.LSD, (int) (rnd.nextDouble() * 100)  + 10);
-        addItem(DrugConfig.MDMA, (int) (rnd.nextDouble() * 56));
+        if (isDealer) {
+            addItem(DrugConfig.WEED, (int) (rnd.nextDouble() * 70) + 14);
+            addItem(DrugConfig.LSD, (int) (rnd.nextDouble() * 100) + 10);
+            addItem(DrugConfig.MDMA, (int) (rnd.nextDouble() * 56));
+        } else {
+            addItem(DrugConfig.WEED, 0);
+            addItem(DrugConfig.LSD, 0);
+            addItem(DrugConfig.MDMA, 0);
+        }
     }
 }

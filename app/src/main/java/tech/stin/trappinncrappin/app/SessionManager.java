@@ -4,7 +4,11 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import java.util.ArrayList;
+
+import tech.stin.trappinncrappin.data.Dealer;
 import tech.stin.trappinncrappin.data.Player;
+import tech.stin.trappinncrappin.database.SQLiteHandlerDealer;
 import tech.stin.trappinncrappin.database.SQLiteHandlerPlayer;
 
 /**
@@ -34,6 +38,26 @@ public class SessionManager {
     public Player getCurrentPlayer() {
         SQLiteHandlerPlayer db = SQLiteHandlerPlayer.sharedInstance(_context);
         return db.getCurrentPlayer();
+    }
+
+    public void addDealer(Dealer dealer) {
+        SQLiteHandlerDealer db = SQLiteHandlerDealer.sharedInstance(_context);
+        db.addDealer(dealer);
+    }
+
+    public ArrayList<Dealer> getCurrentDealers() {
+        SQLiteHandlerDealer db = SQLiteHandlerDealer.sharedInstance(_context);
+        return db.getDealers();
+    }
+
+    public ArrayList<Dealer> getCurrentCustomers() {
+        SQLiteHandlerDealer db = SQLiteHandlerDealer.sharedInstance(_context);
+        return db.getCustomers();
+    }
+
+    public void removeAllDealers() {
+        SQLiteHandlerDealer db = SQLiteHandlerDealer.sharedInstance(_context);
+        db.deleteAllDealers();
     }
 
     public void setLogin(boolean isLoggedIn) {

@@ -17,7 +17,7 @@ public class Stash {
     Stash(String user_id) {
         this.user_id = user_id;
         mStash = new HashMap<>();
-        addItem(DrugConfig.WEED, 3);
+        addItem(DrugConfig.WEED, 0);
     }
 
     public Stash(String user_id, HashMap<String, Integer> stash) {

@@ -13,6 +13,7 @@ import tech.stin.trappinncrappin.data.Stash;
  */
 
 public class StashCursorWrapper extends CursorWrapper {
+    private static final String TAG = StashCursorWrapper.class.getSimpleName();
 
     StashCursorWrapper(Cursor cursor) {
         super(cursor);

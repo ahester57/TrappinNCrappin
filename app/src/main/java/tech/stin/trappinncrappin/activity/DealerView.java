@@ -19,6 +19,7 @@ import java.util.List;
 
 import tech.stin.trappinncrappin.R;
 import tech.stin.trappinncrappin.activity.helper.DealerHolder;
+import tech.stin.trappinncrappin.app.SessionManager;
 import tech.stin.trappinncrappin.data.Dealer;
 
 /**
@@ -38,6 +39,7 @@ public class DealerView extends Fragment {
     private Button bGoToDealer;
     private AdView mAdView;
     private DealerListener dListener;
+    private SessionManager session;
 
     interface DealerListener {
         void goToDealerPage(Dealer dealer);
@@ -55,7 +57,7 @@ public class DealerView extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_dealer, container, false);
         dListener = (DealerListener) getActivity();
-
+        session = new SessionManager(getActivity());
 
         mAdView = (AdView) view.findViewById(R.id.adview_dealers);
         AdRequest adRequest = new AdRequest.Builder().build();
@@ -76,9 +78,12 @@ public class DealerView extends Fragment {
         dRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // @ TODO fix this resetting all the time
-        ArrayList<Dealer> dealers = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            dealers.add(new Dealer());
+        ArrayList<Dealer> dealers = session.getCurrentDealers();
+        if (dealers == null) {
+            for (int i = 0; i < 5; i++) {
+                session.addDealer(new Dealer(true));
+            }
+            dealers = session.getCurrentDealers();
         }
         dRecycler.setAdapter(new DealerAdapter(dealers, dPosition));
 

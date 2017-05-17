@@ -13,7 +13,7 @@ import tech.stin.trappinncrappin.data.Stash;
  */
 
 public class PlayerCursorWrapper extends CursorWrapper {
-
+    private static final String TAG = PlayerCursorWrapper.class.getSimpleName();
     private SQLiteHanderStash sDB;
 
     PlayerCursorWrapper(Cursor cursor, Context context) {
